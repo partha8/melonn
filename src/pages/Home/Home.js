@@ -19,13 +19,33 @@ export const Home = () => {
         <h5>{`${dateStamp[0]}, ${dateStamp[1]} ${dateStamp[2]}, ${dateStamp[3]}`}</h5>
       </section>
 
-      <section className={styles.notesContainer}>
-        {pinnedNotes.length ? <></> : <></>}
-        {notes.map((note) => {
-          const { id } = note;
-          return <Card key={id} {...note} />;
-        })}
-      </section>
+      {pinnedNotes.length ? (
+        <section className={styles.notesContainer}>
+          <div className={styles.pinnedNotes}>
+            <h4>Pinned Notes</h4>
+            {pinnedNotes.map((note) => {
+              const { id } = note;
+              return <Card key={id} {...note} />;
+            })}
+          </div>
+          <div className={styles.otherNotes}>
+            <h4>Other notes</h4>
+            {notes.map((note) => {
+              const { id } = note;
+              return <Card key={id} {...note} />;
+            })}
+          </div>
+        </section>
+      ) : (
+        <section className={styles.notesContainer}>
+          <div className={styles.otherNotes}>
+            {notes.map((note) => {
+              const { id } = note;
+              return <Card key={id} {...note} />;
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 };

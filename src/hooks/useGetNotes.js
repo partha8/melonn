@@ -1,6 +1,12 @@
 import React, { useEffect } from "react";
 import { useAppContext, useNotesContext } from "../context";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../firebase.config";
 
 export const useGetNotes = () => {
@@ -9,7 +15,11 @@ export const useGetNotes = () => {
   useEffect(() => {
     appDispatch({ type: "SET_LOADING", payload: true });
     const colRef = collection(db, "notes");
-    const queryRef = query(colRef, orderBy("updatedAt", "desc"));
+    const queryRef = query(
+      colRef,
+      where("pinned", "==", false),
+      orderBy("updatedAt", "desc")
+    );
     onSnapshot(queryRef, (snapShot) => {
       let notes = [];
       notes = snapShot.docs.map((doc) => {

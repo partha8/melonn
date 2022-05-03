@@ -15,7 +15,11 @@ export const useGetPinnedNotes = () => {
   useEffect(() => {
     appDispatch({ type: "SET_LOADING", payload: true });
     const colRef = collection(db, "notes");
-    const queryRef = query(colRef, where("pinned", "==", true));
+    const queryRef = query(
+      colRef,
+      where("pinned", "==", true),
+      orderBy("updatedAt", "desc")
+    );
     onSnapshot(queryRef, (snapShot) => {
       let pinnedNotes = [];
       pinnedNotes = snapShot.docs.map((doc) => {
