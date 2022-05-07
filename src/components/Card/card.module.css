@@ -1,11 +1,44 @@
 .card {
-    background: var(--light-card-color);
+    background: #fff;
     width: 100%;
     padding: 1rem;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
 }
 
 .cardBody {
     display: flex;
     justify-content: space-between;
+}
+
+.tags {
+    display: flex;
+    gap: 8px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: var(--light-card-color);
+    padding: 1px 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.utils {
+    display: flex;
+    gap: 8px;
+}
+
+.utils>* {
+    cursor: pointer;
 }

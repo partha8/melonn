@@ -29,7 +29,7 @@ export const Home = () => {
             })}
           </div>
           <div className={styles.otherNotes}>
-            <h4>Other notes</h4>
+            <h4>Other Notes</h4>
             {notes.map((note) => {
               const { id } = note;
               return <Card key={id} {...note} />;

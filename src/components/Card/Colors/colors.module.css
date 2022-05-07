@@ -1,0 +1,50 @@
+.palette {
+    position: absolute;
+    background: #fff;
+    /* border: 1px solid black; */
+    padding: 5px;
+    display: flex;
+    gap: 6px;
+    right: 1rem;
+    bottom: -1rem;
+    border-radius: 10px;
+    box-shadow: var(--light-shadow);
+
+}
+
+.palette>* {
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--light-shadow);
+    border: 1px solid var(--border-color);
+}
+
+.color1 {
+    background: #F5C1EA;
+}
+
+.color2 {
+    background: #D3C1F5;
+}
+
+.color3 {
+    background: #C1E2F5;
+}
+
+.color4 {
+    background: #C1F5E6;
+}
+
+.color5 {
+    background: #E2F5C1;
+}
+
+.color6 {
+    background: #F5C5C1;
+}
+
+.color7 {
+    background: #fff;
+}
