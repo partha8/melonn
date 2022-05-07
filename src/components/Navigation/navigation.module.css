@@ -1,0 +1,143 @@
+.nav {
+    position: sticky;
+    background: var(--bg-color);
+    color: var(--font-color-light);
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    min-width: 13rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.accountSetting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--font-color-unselected);
+    margin: 1rem 1rem 0;
+}
+
+.account {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.more {
+    cursor: pointer;
+}
+
+.searchBar {
+    background: var(--card-color);
+    border-radius: var(--borderRadius);
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    gap: 5px;
+    font-size: 1.2rem;
+    margin: 1.4rem 1rem 0;
+}
+
+.search {
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--font-color-light);
+    width: 80%;
+}
+
+.search::placeholder {
+    text-transform: capitalize;
+}
+
+.searchIcon {
+    cursor: pointer;
+    color: var(--font-color-light);
+}
+
+.btnContainer {
+    display: flex;
+    align-items: center;
+    margin: 1.4rem 1rem 0;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.newBtn {
+    background: var(--primary-color);
+    transition: 0.2s;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.newBtn:hover {
+    background: var(--primary-color-dark);
+}
+
+.icons {
+    margin: 1.4rem 0;
+}
+
+.iconContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--font-color-unselected);
+    transition: 0.2s;
+    padding: 0.5rem 0 0.5rem 1rem;
+    font-weight: lighter;
+}
+
+.iconContainer:hover {
+    background: var(--hover-color);
+}
+
+.active {
+    color: var(--font-color-light);
+    background: var(--card-color);
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width:1024px) {
+    .searchBar {
+        background: none;
+    }
+
+    .nav {
+        min-width: auto;
+        width: 5rem;
+    }
+
+    .iconContainer {
+        padding: 0.5rem;
+    }
+
+    .btnContainer,
+    .searchBar,
+    .iconContainer,
+    .accountSetting {
+        justify-content: center;
+    }
+
+    .account span,
+    .more,
+    .btnContainer p,
+    .icons p,
+    .search {
+        display: none;
+    }
+}

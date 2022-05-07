@@ -1,0 +1,11 @@
+.card {
+    background: var(--light-card-color);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.cardBody {
+    display: flex;
+    justify-content: space-between;
+}

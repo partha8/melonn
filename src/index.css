@@ -1,13 +1,121 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --font-color-light: #f8f9fd;
+  --font-color-unselected: var(--clr-grey-50);
+  --font-color-dark: var(--clr-grey-900);
+
+  --font-color-tint1: var(--clr-grey-600);
+  --font-color-tint2: var(--clr-grey-400);
+
+  --border-color: var(--clr-grey-40);
+
+  --bg-color: #121212;
+  --card-color: #2e2e2e;
+  --light-card-color: #F2F2F2;
+  --hover-color: #363636;
+  --misc-color: #1f1f1f;
+
+  --primary-color: #00A82D;
+  --primary-color-dark: #018c26;
+  --secondary-color: #0081C3;
+  --danger-color: #ff0000;
+  --warning-color: #fade53;
+
+  --transition-one: all 0.4s linear;
+  --transition-two: 0.3s ease-in-out all;
+  --borderRadius: 10px;
+  --letterSpacing: 1px;
+  --max-width: 1120px;
+  --fixed-width: 500px;
+  --fluid-width: 90vw;
+}
+
+@media (max-width: 800px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+a {
+  background: transparent;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+body {
+  font-family: "Roboto", Arial, Helvetica, sans-serif, sans-serif;
+  color: var(--font-color-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+}
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--bg-color);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: var(--font-color-light);
+} */
+
+.dropdown {
+  position: absolute;
+  right: 1.5rem;
+  top: 2.5rem;
+  z-index: 2;
+  background: var(--bg-color);
+}
+
+.item {
+  border: none;
+  gap: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.item:hover {
+  background: var(--hover-color);
+}
+
+.App {
+  display: flex;
+}
+
+.page {
+  width: 100%;
+  padding: 1rem;
+}
+
+.more {
+  cursor: pointer;
 }
