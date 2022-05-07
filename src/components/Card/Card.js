@@ -8,9 +8,8 @@ import {
   BsArchive,
   BsArchiveFill,
 } from "react-icons/bs";
-import { useState } from "react";
 import ColorPalette from "./Colors/Colors";
-import { useClickOutside } from "../../hooks";
+
 
 export const Card = ({
   id,
