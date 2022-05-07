@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTrashContext } from "../../context";
 import { useGetTrashedNotes } from "../../hooks";
 import styles from "./trash.module.css";

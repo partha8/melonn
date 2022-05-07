@@ -1,11 +1,7 @@
-import React, { createContext, useContext, useReducer, useState } from "react";
-import { trashReducer } from "../reducers";
+import React, { createContext, useContext, useState } from "react";
+
 import {
   collection,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
   doc,
   deleteDoc,
   addDoc,
