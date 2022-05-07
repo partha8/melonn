@@ -3,13 +3,13 @@ export const notesReducer = (state, action) => {
     case "SET_NOTES": {
       return {
         ...state,
-        notes: action.payload,
+        notes: [...action.payload],
       };
     }
     case "SET_PINNED_NOTES": {
       return {
         ...state,
-        pinnedNotes: action.payload,
+        pinnedNotes: [...action.payload],
       };
     }
     default:

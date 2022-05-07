@@ -63,7 +63,7 @@ export const Navigation = () => {
               ? `${styles.iconContainer} ${styles.active} `
               : `${styles.iconContainer}`
           }
-          to="/notes"
+          to="/tags"
         >
           <FaTags className={styles.icon} /> <p className="flex-center">Tags</p>
         </NavLink>

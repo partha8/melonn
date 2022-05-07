@@ -8,22 +8,34 @@ import {
   BsArchive,
   BsArchiveFill,
 } from "react-icons/bs";
+import { MdClose } from "react-icons/md";
 import ColorPalette from "./Colors/Colors";
+import { useTrashContext } from "../../context";
+import { useLocation } from "react-router-dom";
 
+export const Card = (note) => {
+  let {
+    id,
+    title,
+    archived,
+    body,
+    createdAt,
+    updatedAt,
+    pinned,
+    trashed,
+    tags,
+    color,
+  } = note;
 
-export const Card = ({
-  id,
-  title,
-  archived,
-  body,
-  createdAt,
-  updatedAt,
-  pinned,
-  trashed,
-  tags,
-  color,
-}) => {
-  body = removeHTMLTags(body);
+  const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
+
+  const location = useLocation();
+  console.log(location.pathname);
+
+  if (body) {
+    body = removeHTMLTags(body);
+  }
+
   if (title.length > 20) {
     title = title.substr(0, 20) + "...";
   }
@@ -49,7 +61,18 @@ export const Card = ({
           <h6>{title}</h6>
           <p>{body}</p>
         </article>
-        <span className="icon">{pinned ? <BsFillPinFill /> : <BsPin />}</span>
+        {location.pathname === "/" ? (
+          <span className="icon">{pinned ? <BsFillPinFill /> : <BsPin />}</span>
+        ) : (
+          <MdClose
+            className="icon"
+            onClick={() => {
+              if (location.pathname === "/trash") {
+                deleteFromTrash(id);
+              }
+            }}
+          />
+        )}
       </section>
       <section className={styles.tags}>
         {tags.map((tag, index) => {
@@ -63,11 +86,14 @@ export const Card = ({
       <section className={styles.footer}>
         <p className={styles.dateCreated}>Created on: {dateCreated} </p>
         <div className={styles.utils}>
-          <span>
-            <ColorPalette id={id} />
-          </span>
-          <span>{archived ? <BsArchiveFill /> : <BsArchive />}</span>
-          <span>{trashed ? <BsTrashFill /> : <BsTrash />}</span>
+          <ColorPalette id={id} />
+
+          {archived ? <BsArchiveFill /> : <BsArchive />}
+          {trashed ? (
+            <BsTrashFill onClick={() => restoreNote(note)} />
+          ) : (
+            <BsTrash onClick={() => deleteNote(note)} />
+          )}
         </div>
       </section>
     </div>
