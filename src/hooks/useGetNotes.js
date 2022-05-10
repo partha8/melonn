@@ -20,7 +20,7 @@ export const useGetNotes = () => {
       where("pinned", "==", false),
       orderBy("updatedAt", "desc")
     );
-    onSnapshot(queryRef, (snapShot) => {
+    const unsub = onSnapshot(queryRef, (snapShot) => {
       let notes = [];
       notes = snapShot.docs.map((doc) => {
         const data = doc.data();
@@ -30,5 +30,6 @@ export const useGetNotes = () => {
       notesDispatch({ type: "SET_NOTES", payload: notes });
       appDispatch({ type: "SET_LOADING", payload: false });
     });
+    return () => unsub();
   }, []);
 };

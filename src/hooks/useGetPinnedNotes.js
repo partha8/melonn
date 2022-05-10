@@ -20,7 +20,7 @@ export const useGetPinnedNotes = () => {
       where("pinned", "==", true),
       orderBy("updatedAt", "desc")
     );
-    onSnapshot(queryRef, (snapShot) => {
+    const unsub = onSnapshot(queryRef, (snapShot) => {
       let pinnedNotes = [];
       pinnedNotes = snapShot.docs.map((doc) => {
         const data = doc.data();
@@ -30,5 +30,6 @@ export const useGetPinnedNotes = () => {
       notesDispatch({ type: "SET_PINNED_NOTES", payload: pinnedNotes });
       appDispatch({ type: "SET_LOADING", payload: false });
     });
+    return () => unsub();
   }, []);
 };

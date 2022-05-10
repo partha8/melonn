@@ -1,8 +1,9 @@
 import styles from "./navigation.module.css";
 import { BsThreeDots } from "react-icons/bs";
 import { AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
-import { IoMdTrash } from "react-icons/io";
+import { IoMdTrash, IoMdArchive } from "react-icons/io";
 import { MdHome, MdStickyNote2 } from "react-icons/md";
+import { FaTags } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 export const Navigation = () => {
@@ -62,10 +63,33 @@ export const Navigation = () => {
               ? `${styles.iconContainer} ${styles.active} `
               : `${styles.iconContainer}`
           }
+          to="/notes"
+        >
+          <FaTags className={styles.icon} /> <p className="flex-center">Tags</p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.iconContainer} ${styles.active} `
+              : `${styles.iconContainer}`
+          }
           to="/trash"
         >
           <IoMdTrash className={styles.icon} />{" "}
           <p className="flex-center">Trash</p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? `${styles.iconContainer} ${styles.active} `
+              : `${styles.iconContainer}`
+          }
+          to="/archive"
+        >
+          <IoMdArchive className={styles.icon} />{" "}
+          <p className="flex-center">Archive</p>
         </NavLink>
       </section>
     </nav>
