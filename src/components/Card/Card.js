@@ -10,7 +10,7 @@ import {
 } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import ColorPalette from "./Colors/Colors";
-import { useTrashContext } from "../../context";
+import { useArchiveContext, useTrashContext } from "../../context";
 import { useLocation } from "react-router-dom";
 
 export const Card = (note) => {
@@ -28,6 +28,8 @@ export const Card = (note) => {
   } = note;
 
   const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
+  const { archiveNote, restoreNoteFromArchive, deleteFromArchive } =
+    useArchiveContext();
 
   const location = useLocation();
   console.log(location.pathname);
@@ -88,7 +90,11 @@ export const Card = (note) => {
         <div className={styles.utils}>
           <ColorPalette id={id} />
 
-          {archived ? <BsArchiveFill /> : <BsArchive />}
+          {archived ? (
+            <BsArchiveFill onClick={() => restoreNoteFromArchive(note)} />
+          ) : (
+            <BsArchive onClick={() => archiveNote(note)} />
+          )}
           {trashed ? (
             <BsTrashFill onClick={() => restoreNote(note)} />
           ) : (
