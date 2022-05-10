@@ -9,6 +9,11 @@
     position: relative;
 }
 
+.notesPageCard {
+    border-radius: 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
 .cardBody {
     display: flex;
     justify-content: space-between;
@@ -24,6 +29,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .tag {
@@ -32,6 +38,7 @@
     border-radius: 10px;
     cursor: pointer;
     font-size: 0.8rem;
+    width: fit-content;
 }
 
 .utils {

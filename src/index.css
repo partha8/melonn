@@ -156,3 +156,21 @@ body {
     width: 100%;
   }
 }
+
+
+.wrapper,
+.editor {
+  height: 79vh;
+  overflow: none;
+  flex: 1;
+  word-wrap: break-word;
+}
+
+.editor {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  word-wrap: break-word;
+  border: 1px solid var(--border-color);
+  padding: 1rem;
+}
