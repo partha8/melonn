@@ -14,8 +14,8 @@ const TrashContext = createContext();
 export const TrashProvider = ({ children }) => {
   const [trashedNotes, setTrashedNotes] = useState([]);
 
-  const deleteNote = (note) => {
-    const docRef = doc(db, "notes", note.id);
+  const deleteNote = (note, collectionPath) => {
+    const docRef = doc(db, collectionPath, note.id);
     const colRef = collection(db, "trash");
     addDoc(colRef, {
       archived: false,

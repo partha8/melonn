@@ -93,12 +93,28 @@ export const Card = (note) => {
           {archived ? (
             <BsArchiveFill onClick={() => restoreNoteFromArchive(note)} />
           ) : (
-            <BsArchive onClick={() => archiveNote(note)} />
+            <BsArchive
+              onClick={() => {
+                if (location.pathname === "/") {
+                  archiveNote(note, "notes");
+                } else if (location.pathname === "/trash") {
+                  archiveNote(note, "trash");
+                }
+              }}
+            />
           )}
           {trashed ? (
             <BsTrashFill onClick={() => restoreNote(note)} />
           ) : (
-            <BsTrash onClick={() => deleteNote(note)} />
+            <BsTrash
+              onClick={() => {
+                if (location.pathname === "/") {
+                  deleteNote(note, "notes");
+                } else if (location.pathname === "/archive") {
+                  deleteNote(note, "archive");
+                }
+              }}
+            />
           )}
         </div>
       </section>

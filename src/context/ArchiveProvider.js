@@ -14,8 +14,8 @@ const ArchiveContext = createContext();
 export const ArchiveProvider = ({ children }) => {
   const [archivedNotes, setArchivedNotes] = useState([]);
 
-  const archiveNote = (note) => {
-    const docRef = doc(db, "notes", note.id);
+  const archiveNote = (note, collectionPath) => {
+    const docRef = doc(db, collectionPath, note.id);
     const colRef = collection(db, "archive");
     addDoc(colRef, {
       archived: true,
