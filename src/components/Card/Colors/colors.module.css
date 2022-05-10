@@ -9,6 +9,7 @@
     bottom: -1rem;
     border-radius: 10px;
     box-shadow: var(--light-shadow);
+    z-index: 10;
 
 }
 

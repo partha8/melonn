@@ -1,6 +1,6 @@
 .sidebar {
     border-right: 1px solid var(--border-color);
-    min-width: 21rem;
+    min-width: 24rem;
     background: var(--light-card-color);
     overflow-y: auto;
 }
@@ -21,4 +21,7 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
 }

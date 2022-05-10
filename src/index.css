@@ -160,7 +160,7 @@ body {
 
 .wrapper,
 .editor {
-  height: 79vh;
+  height: 70vh;
   overflow: none;
   flex: 1;
   word-wrap: break-word;
@@ -171,6 +171,6 @@ body {
   flex: 1;
   overflow-y: auto;
   word-wrap: break-word;
-  border: 1px solid var(--border-color);
+  /* border: 1px solid var(--border-color); */
   padding: 1rem;
 }

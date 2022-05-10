@@ -3,6 +3,7 @@ import { useNotesContext } from "../../context";
 import { Card } from "../Card/Card";
 import styles from "./sidebar.module.css";
 import { MdStickyNote2 } from "react-icons/md";
+import { FaFilter } from "react-icons/fa";
 
 export const Sidebar = () => {
   const {
@@ -16,6 +17,7 @@ export const Sidebar = () => {
         </h4>
         <div className={styles.filterContainer}>
           <p>{notes.length + pinnedNotes.length} notes</p>
+          <FaFilter className="more" />
         </div>
       </div>
       {pinnedNotes?.map((pinnedNote) => {
