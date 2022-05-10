@@ -15,7 +15,7 @@ const ColorPalette = ({id}) => {
     });
   };
 
-  const clickHandler = (e) => {
+  const changeColorHandler = (e) => {
     const colorClass = e.target.classList.value;
     if (colorClass.includes("color1")) {
       updateColor(id, "#F5C1EA");
@@ -39,7 +39,7 @@ const ColorPalette = ({id}) => {
     <div>
       <BsPaletteFill onClick={() => setShowPalette(!showPalette)} />
       {showPalette && (
-        <div onClick={clickHandler} className={styles.palette} ref={domNode}>
+        <div onClick={changeColorHandler} className={styles.palette} ref={domNode}>
           <div className={styles.color1}></div>
           <div className={styles.color2}></div>
           <div className={styles.color3}></div>
