@@ -15,6 +15,7 @@ export const ArchiveProvider = ({ children }) => {
   const [archivedNotes, setArchivedNotes] = useState([]);
 
   const archiveNote = (note, collectionPath) => {
+    console.log(note, collectionPath);
     const docRef = doc(db, collectionPath, note.id);
     const colRef = collection(db, "archive");
     addDoc(colRef, {
@@ -23,7 +24,7 @@ export const ArchiveProvider = ({ children }) => {
       color: note.color,
       createdAt: note.createdAt,
       pinned: note.pinned,
-      tags: note.tags,
+      tag: note.tag,
       title: note.title,
       trashed: false,
       updatedAt: note.updatedAt,
@@ -42,7 +43,7 @@ export const ArchiveProvider = ({ children }) => {
       color: note.color,
       createdAt: note.createdAt,
       pinned: note.pinned,
-      tags: note.tags,
+      tag: note.tag,
       title: note.title,
       trashed: false,
       updatedAt: note.updatedAt,
