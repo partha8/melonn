@@ -32,7 +32,6 @@ export const Card = (note) => {
     useArchiveContext();
 
   const location = useLocation();
-  console.log(location.pathname);
 
   if (body) {
     body = removeHTMLTags(body);
@@ -71,6 +70,8 @@ export const Card = (note) => {
             onClick={() => {
               if (location.pathname === "/trash") {
                 deleteFromTrash(id);
+              } else if (location.pathname === "/archive") {
+                deleteFromArchive(id);
               }
             }}
           />
