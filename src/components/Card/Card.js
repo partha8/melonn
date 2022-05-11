@@ -10,7 +10,11 @@ import {
 } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import ColorPalette from "./Colors/Colors";
-import { useArchiveContext, useTrashContext } from "../../context";
+import {
+  useAppContext,
+  useArchiveContext,
+  useTrashContext,
+} from "../../context";
 import { useLocation } from "react-router-dom";
 
 export const Card = (note) => {
@@ -20,7 +24,6 @@ export const Card = (note) => {
     archived,
     body,
     createdAt,
-    updatedAt,
     pinned,
     trashed,
     tag,
@@ -30,6 +33,7 @@ export const Card = (note) => {
   const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
   const { archiveNote, restoreNoteFromArchive, deleteFromArchive } =
     useArchiveContext();
+  const { toastHandler } = useAppContext();
 
   const location = useLocation();
 
@@ -76,8 +80,10 @@ export const Card = (note) => {
             onClick={() => {
               if (location.pathname === "/trash") {
                 deleteFromTrash(id);
+                toastHandler(true, "Deleted From Trash!", "success");
               } else if (location.pathname === "/archive") {
                 deleteFromArchive(id);
+                toastHandler(true, "Deleted From Archive", "success");
               }
             }}
           />
@@ -90,27 +96,41 @@ export const Card = (note) => {
           <ColorPalette id={id} />
 
           {archived ? (
-            <BsArchiveFill onClick={() => restoreNoteFromArchive(note)} />
+            <BsArchiveFill
+              onClick={() => {
+                restoreNoteFromArchive(note);
+                toastHandler(true, "Note un-archived!", "success");
+              }}
+            />
           ) : (
             <BsArchive
               onClick={() => {
                 if (location.pathname === "/") {
                   archiveNote(note, "notes");
+                  toastHandler(true, "Note archived!", "success");
                 } else if (location.pathname === "/trash") {
                   archiveNote(note, "trash");
+                  toastHandler(true, "Note archived!", "success");
                 }
               }}
             />
           )}
           {trashed ? (
-            <BsTrashFill onClick={() => restoreNote(note)} />
+            <BsTrashFill
+              onClick={() => {
+                restoreNote(note);
+                toastHandler(true, "Note un-trashed!", "success");
+              }}
+            />
           ) : (
             <BsTrash
               onClick={() => {
                 if (location.pathname === "/") {
                   deleteNote(note, "notes");
+                  toastHandler(true, "Note trashed!", "success");
                 } else if (location.pathname === "/archive") {
                   deleteNote(note, "archive");
+                  toastHandler(true, "Note trashed!", "success");
                 }
               }}
             />

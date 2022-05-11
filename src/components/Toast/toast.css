@@ -1,10 +1,31 @@
 .toast {
   position: fixed;
   right: 2rem;
-  top: 15%;
-  z-index: 10;
+  bottom: 2rem;
+  z-index: 20;
 }
 
 .toast p {
   font-size: 1.2rem;
+}
+
+.alert {
+  max-width: 45rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--borderRadius);
+}
+
+
+.alert-error {
+  background: var(--clr-red);
+  color: var(--clr-white);
+}
+
+.alert-warning {
+  background: var(--clr-yellow);
+}
+
+.alert-success {
+  background: var(--clr-green);
+  color: var(--clr-white);
 }

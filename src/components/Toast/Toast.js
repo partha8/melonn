@@ -1,23 +1,24 @@
 import React from "react";
 import { useEffect } from "react";
-// import { useStateContext } from "../../context/StateProvider";
+import { useAppContext } from "../../context";
+
 import "./toast.css";
 
 export const Toast = () => {
-  // const { toast, toastHandler } = useStateContext();
-  // const { showToast, message, type } = toast;
+  const { toast, toastHandler } = useAppContext();
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     toastHandler();
-  //   }, 3000);
-  //   return () => clearTimeout(timeout);
-  // }, [showToast]);
+  const { message, type } = toast;
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      toastHandler();
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
-    // <div className={`alert alert-${type} toast`}>
-    //   <p>{message}</p>
-    // </div>
-    <></>
+    <div className={`alert alert-${type} toast`}>
+      <p>{message}</p>
+    </div>
   );
 };

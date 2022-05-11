@@ -11,10 +11,10 @@ import { db } from "../firebase.config";
 
 export const useGetTrashedNotes = () => {
   const { setTrashedNotes } = useTrashContext();
-  const { appDispatch } = useAppContext();
+  const { setLoading } = useAppContext();
 
   useEffect(() => {
-    appDispatch({ type: "SET_LOADING", payload: true });
+    setLoading(true);
     const colRef = collection(db, "trash");
     const queryRef = query(colRef, orderBy("trashedAt", "desc"));
     const unsub = onSnapshot(queryRef, (snapShot) => {
@@ -25,7 +25,7 @@ export const useGetTrashedNotes = () => {
         return data;
       });
       setTrashedNotes(notes);
-      appDispatch({ type: "SET_LOADING", payload: false });
+      setLoading(false);
     });
     return () => unsub();
   }, []);

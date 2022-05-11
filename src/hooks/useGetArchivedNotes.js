@@ -11,10 +11,10 @@ import { db } from "../firebase.config";
 
 export const useGetArchivedNotes = () => {
   const { setArchivedNotes } = useArchiveContext();
-  const { appDispatch } = useAppContext();
+  const { setLoading } = useAppContext();
 
   useEffect(() => {
-    appDispatch({ type: "SET_LOADING", payload: true });
+    setLoading(true);
     const colRef = collection(db, "archive");
     const queryRef = query(colRef, orderBy("archivedAt", "desc"));
     const unsub = onSnapshot(queryRef, (snapShot) => {
@@ -25,7 +25,7 @@ export const useGetArchivedNotes = () => {
         return data;
       });
       setArchivedNotes(notes);
-      appDispatch({ type: "SET_LOADING", payload: false });
+      setLoading(false);
     });
     return () => unsub();
   }, []);
