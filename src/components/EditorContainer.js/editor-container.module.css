@@ -25,7 +25,7 @@
 }
 
 .editorUtils {
-    border-top: 1px solid var(--border-color);
+    /* border-top: 1px solid var(--border-color); */
     padding: 1rem 0.5rem;
     position: absolute;
     bottom: 0;
