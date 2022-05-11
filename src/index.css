@@ -192,11 +192,16 @@ body {
 }
 
 .loading-component {
-
   margin: 2rem 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.card-icon {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
 }

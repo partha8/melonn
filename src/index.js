@@ -5,6 +5,7 @@ import { App } from "./App";
 import {
   AppProvider,
   ArchiveProvider,
+  EditorProvider,
   NotesProvider,
   TrashProvider,
 } from "./context";
@@ -15,11 +16,13 @@ root.render(
   <Router>
     <AppProvider>
       <NotesProvider>
-        <TrashProvider>
-          <ArchiveProvider>
-            <App />
-          </ArchiveProvider>
-        </TrashProvider>
+        <EditorProvider>
+          <TrashProvider>
+            <ArchiveProvider>
+              <App />
+            </ArchiveProvider>
+          </TrashProvider>
+        </EditorProvider>
       </NotesProvider>
     </AppProvider>
   </Router>
