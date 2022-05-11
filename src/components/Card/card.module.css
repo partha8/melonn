@@ -36,9 +36,14 @@
 
 .utils {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 8px;
 }
 
 .utils>* {
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

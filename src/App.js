@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Navigation } from "./components";
 import { useNotesContext } from "./context";
 import { useGetNotes, useGetPinnedNotes } from "./hooks";
-import { Home } from "./pages";
+import { Home, Trash } from "./pages";
 
 export const App = () => {
   useGetNotes();
@@ -13,6 +13,7 @@ export const App = () => {
       <Navigation />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/trash" element={<Trash />} />
       </Routes>
     </div>
   );

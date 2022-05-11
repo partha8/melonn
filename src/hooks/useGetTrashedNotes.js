@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useAppContext, useNotesContext } from "../context";
+import React, { useEffect } from "react";
+import { useTrashContext, useAppContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -9,25 +9,22 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
-export const useGetPinnedNotes = () => {
-  const { notesDispatch } = useNotesContext();
+export const useGetTrashedNotes = () => {
+  const { setTrashedNotes } = useTrashContext();
   const { appDispatch } = useAppContext();
+
   useEffect(() => {
     appDispatch({ type: "SET_LOADING", payload: true });
-    const colRef = collection(db, "notes");
-    const queryRef = query(
-      colRef,
-      where("pinned", "==", true),
-      orderBy("updatedAt", "desc")
-    );
+    const colRef = collection(db, "trash");
+    const queryRef = query(colRef, orderBy("trashedAt", "desc"));
     const unsub = onSnapshot(queryRef, (snapShot) => {
-      let pinnedNotes = [];
-      pinnedNotes = snapShot.docs.map((doc) => {
+      let notes = [];
+      notes = snapShot.docs.map((doc) => {
         const data = doc.data();
         data["id"] = doc.id;
         return data;
       });
-      notesDispatch({ type: "SET_PINNED_NOTES", payload: pinnedNotes });
+      setTrashedNotes(notes);
       appDispatch({ type: "SET_LOADING", payload: false });
     });
     return () => unsub();

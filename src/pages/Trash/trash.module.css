@@ -1,0 +1,17 @@
+.trashAll {
+    display: flex;
+    justify-content: space-between;
+}
+
+.trashAll>* {
+    font-style: normal;
+    font-weight: 600;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: var(--danger-color);
+}

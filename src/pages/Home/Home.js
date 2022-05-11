@@ -8,38 +8,39 @@ export const Home = () => {
     notesState: { notes, pinnedNotes },
   } = useNotesContext();
 
+  console.log(notes, pinnedNotes);
+
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");
-  console.log(notes);
 
   return (
     <div className="page">
-      <section className={styles.header}>
+      <section className="page-header">
         {time[0] < 12 ? <h5>Good Morning!</h5> : <h5>Good evening!</h5>}
         <h5>{`${dateStamp[0]}, ${dateStamp[1]} ${dateStamp[2]}, ${dateStamp[3]}`}</h5>
       </section>
 
       {pinnedNotes.length ? (
-        <section className={styles.notesContainer}>
-          <div className={styles.pinnedNotes}>
+        <section className="notesContainer">
+          <div className="notes">
             <h4>Pinned Notes</h4>
-            {pinnedNotes.map((note) => {
+            {pinnedNotes?.map((note) => {
               const { id } = note;
               return <Card key={id} {...note} />;
             })}
           </div>
-          <div className={styles.otherNotes}>
+          <div className="notes">
             <h4>Other Notes</h4>
-            {notes.map((note) => {
+            {notes?.map((note) => {
               const { id } = note;
               return <Card key={id} {...note} />;
             })}
           </div>
         </section>
       ) : (
-        <section className={styles.notesContainer}>
-          <div className={styles.otherNotes}>
-            {notes.map((note) => {
+        <section className="notesContainer">
+          <div className="notes">
+            {notes?.map((note) => {
               const { id } = note;
               return <Card key={id} {...note} />;
             })}
