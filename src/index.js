@@ -2,7 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { App } from "./App";
-import { AppProvider, NotesProvider, TrashProvider } from "./context";
+import {
+  AppProvider,
+  ArchiveProvider,
+  NotesProvider,
+  TrashProvider,
+} from "./context";
 import { BrowserRouter as Router } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -12,7 +17,9 @@ root.render(
       <AppProvider>
         <NotesProvider>
           <TrashProvider>
-            <App />
+            <ArchiveProvider>
+              <App />
+            </ArchiveProvider>
           </TrashProvider>
         </NotesProvider>
       </AppProvider>

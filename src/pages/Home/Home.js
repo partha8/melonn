@@ -8,8 +8,6 @@ export const Home = () => {
     notesState: { notes, pinnedNotes },
   } = useNotesContext();
 
-  console.log(notes, pinnedNotes);
-
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");
 

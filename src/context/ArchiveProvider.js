@@ -9,32 +9,32 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 
-const TrashContext = createContext();
+const ArchiveContext = createContext();
 
-export const TrashProvider = ({ children }) => {
-  const [trashedNotes, setTrashedNotes] = useState([]);
+export const ArchiveProvider = ({ children }) => {
+  const [archivedNotes, setArchivedNotes] = useState([]);
 
-  const deleteNote = (note, collectionPath) => {
+  const archiveNote = (note, collectionPath) => {
     const docRef = doc(db, collectionPath, note.id);
-    const colRef = collection(db, "trash");
+    const colRef = collection(db, "archive");
     addDoc(colRef, {
-      archived: false,
+      archived: true,
       body: note.body,
       color: note.color,
       createdAt: note.createdAt,
       pinned: note.pinned,
       tags: note.tags,
       title: note.title,
-      trashed: true,
+      trashed: false,
       updatedAt: note.updatedAt,
-      trashedAt: serverTimestamp(),
+      archivedAt: serverTimestamp(),
       id: note.id,
     });
     deleteDoc(docRef);
   };
 
-  const restoreNote = (note) => {
-    const docRef = doc(db, "trash", note.id);
+  const restoreNoteFromArchive = (note) => {
+    const docRef = doc(db, "archive", note.id);
     const colRef = collection(db, "notes");
     addDoc(colRef, {
       archived: false,
@@ -50,24 +50,24 @@ export const TrashProvider = ({ children }) => {
     deleteDoc(docRef);
   };
 
-  const deleteFromTrash = (id) => {
-    const docRef = doc(db, "trash", id);
+  const deleteFromArchive = (id) => {
+    const docRef = doc(db, "archive", id);
     deleteDoc(docRef);
   };
 
   return (
-    <TrashContext.Provider
+    <ArchiveContext.Provider
       value={{
-        trashedNotes,
-        setTrashedNotes,
-        deleteNote,
-        restoreNote,
-        deleteFromTrash,
+        archivedNotes,
+        setArchivedNotes,
+        archiveNote,
+        restoreNoteFromArchive,
+        deleteFromArchive,
       }}
     >
       {children}
-    </TrashContext.Provider>
+    </ArchiveContext.Provider>
   );
 };
 
-export const useTrashContext = () => useContext(TrashContext);
+export const useArchiveContext = () => useContext(ArchiveContext);

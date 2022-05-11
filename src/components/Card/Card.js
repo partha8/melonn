@@ -10,7 +10,7 @@ import {
 } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
 import ColorPalette from "./Colors/Colors";
-import { useTrashContext } from "../../context";
+import { useArchiveContext, useTrashContext } from "../../context";
 import { useLocation } from "react-router-dom";
 
 export const Card = (note) => {
@@ -28,9 +28,10 @@ export const Card = (note) => {
   } = note;
 
   const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
+  const { archiveNote, restoreNoteFromArchive, deleteFromArchive } =
+    useArchiveContext();
 
   const location = useLocation();
-  console.log(location.pathname);
 
   if (body) {
     body = removeHTMLTags(body);
@@ -69,6 +70,8 @@ export const Card = (note) => {
             onClick={() => {
               if (location.pathname === "/trash") {
                 deleteFromTrash(id);
+              } else if (location.pathname === "/archive") {
+                deleteFromArchive(id);
               }
             }}
           />
@@ -88,11 +91,31 @@ export const Card = (note) => {
         <div className={styles.utils}>
           <ColorPalette id={id} />
 
-          {archived ? <BsArchiveFill /> : <BsArchive />}
+          {archived ? (
+            <BsArchiveFill onClick={() => restoreNoteFromArchive(note)} />
+          ) : (
+            <BsArchive
+              onClick={() => {
+                if (location.pathname === "/") {
+                  archiveNote(note, "notes");
+                } else if (location.pathname === "/trash") {
+                  archiveNote(note, "trash");
+                }
+              }}
+            />
+          )}
           {trashed ? (
             <BsTrashFill onClick={() => restoreNote(note)} />
           ) : (
-            <BsTrash onClick={() => deleteNote(note)} />
+            <BsTrash
+              onClick={() => {
+                if (location.pathname === "/") {
+                  deleteNote(note, "notes");
+                } else if (location.pathname === "/archive") {
+                  deleteNote(note, "archive");
+                }
+              }}
+            />
           )}
         </div>
       </section>
