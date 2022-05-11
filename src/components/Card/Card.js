@@ -18,17 +18,8 @@ import {
 import { useLocation } from "react-router-dom";
 
 export const Card = (note) => {
-  let {
-    id,
-    title,
-    archived,
-    body,
-    createdAt,
-    pinned,
-    trashed,
-    tag,
-    color,
-  } = note;
+  let { id, title, archived, body, createdAt, pinned, trashed, tag, color } =
+    note;
 
   const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
   const { archiveNote, restoreNoteFromArchive, deleteFromArchive } =
@@ -105,7 +96,10 @@ export const Card = (note) => {
           ) : (
             <BsArchive
               onClick={() => {
-                if (location.pathname === "/") {
+                if (
+                  location.pathname === "/" ||
+                  location.pathname === "/notes"
+                ) {
                   archiveNote(note, "notes");
                   toastHandler(true, "Note archived!", "success");
                 } else if (location.pathname === "/trash") {
@@ -125,7 +119,10 @@ export const Card = (note) => {
           ) : (
             <BsTrash
               onClick={() => {
-                if (location.pathname === "/") {
+                if (
+                  location.pathname === "/" ||
+                  location.pathname === "/notes"
+                ) {
                   deleteNote(note, "notes");
                   toastHandler(true, "Note trashed!", "success");
                 } else if (location.pathname === "/archive") {
