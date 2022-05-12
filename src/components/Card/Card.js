@@ -1,5 +1,6 @@
 import styles from "./card.module.css";
 import { removeHTMLTags } from "../../utils/utils";
+
 import {
   BsPin,
   BsFillPinFill,
@@ -9,6 +10,12 @@ import {
   BsArchiveFill,
 } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import {
+  FcHighPriority,
+  FcLowPriority,
+  FcMediumPriority,
+} from "react-icons/fc";
+
 import ColorPalette from "./Colors/Colors";
 import {
   useAppContext,
@@ -96,7 +103,14 @@ export const Card = (note) => {
     >
       <section className={styles.cardBody}>
         <article>
-          <h6>{title}</h6> <span>{}</span>
+          <h6>{title}</h6>{" "}
+          {priority === "High" ? (
+            <FcHighPriority />
+          ) : priority === "Medium" ? (
+            <FcMediumPriority />
+          ) : (
+            <FcLowPriority />
+          )}
           <p>{body}</p>
         </article>
         {location.pathname === "/" || location.pathname === "/notes" ? (

@@ -25,7 +25,10 @@ export const EditorContainer = () => {
   const {
     editorState: { title, body, tag, priority },
     editorDispatch,
+    handleNewTag,
   } = useEditorContext();
+
+  const [tagInput, setTagInput] = useState("");
 
   useEffect(() => {
     editorDispatch({
@@ -45,6 +48,13 @@ export const EditorContainer = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [title, body, tag, priority]);
+
+  const handleTagInput = (e) => {
+    if (e.keyCode === 13) {
+      handleNewTag(tagInput);
+      setTagInput("");
+    }
+  };
 
   return (
     <div className={styles.editorContainer}>
@@ -78,19 +88,25 @@ export const EditorContainer = () => {
             }
             className={styles.tags}
           >
-            {tags?.map((tag) => {
+            {tags?.map((value) => {
               return (
                 <option
-                  key={tag.id}
-                  value={tag.tag}
-                  selected={tag.tag === selectedNote.tag}
+                  key={value.id}
+                  value={value.tag}
+                  selected={value.tag === tag}
                 >
-                  {tag.tag}
+                  {value.tag}
                 </option>
               );
             })}
           </select>
-          <input placeholder="new tag" className={styles.tagInput} />
+          <input
+            onKeyDown={handleTagInput}
+            placeholder="new tag"
+            className={styles.tagInput}
+            value={tagInput}
+            onChange={(e) => setTagInput(e.target.value)}
+          />
         </div>
 
         <div className={styles.priorityContainer}>
