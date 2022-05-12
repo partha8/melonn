@@ -1,5 +1,5 @@
-import React from "react";
-import { useAppContext, useTrashContext } from "../../context";
+import React, { useEffect } from "react";
+import { useAppContext, useNotesContext, useTrashContext } from "../../context";
 import { useGetTrashedNotes } from "../../hooks";
 import styles from "./trash.module.css";
 import { Card, Loading } from "../../components";
@@ -7,8 +7,13 @@ import { Card, Loading } from "../../components";
 export const Trash = () => {
   const { trashedNotes, clearAll } = useTrashContext();
   const { loading } = useAppContext();
+  const { resetSelectedNote } = useNotesContext();
 
   useGetTrashedNotes();
+
+  useEffect(() => {
+    resetSelectedNote();
+  }, []);
 
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");

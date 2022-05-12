@@ -1,4 +1,4 @@
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
 import React, { createContext, useContext, useReducer } from "react";
 import { db } from "../firebase.config";
 import { notesReducer } from "../reducers";
@@ -22,10 +22,16 @@ export const NotesProvider = ({ children }) => {
       body: body,
       tag: tag,
       priority: priority,
+      updatedAt: serverTimestamp(),
     });
   };
+  const resetSelectedNote = () => {
+    notesDispatch({ type: "SELECT_NOTE", payload: { note: null, id: null } });
+  };
   return (
-    <NotesContext.Provider value={{ notesState, notesDispatch, updateNote }}>
+    <NotesContext.Provider
+      value={{ notesState, notesDispatch, updateNote, resetSelectedNote }}
+    >
       {children}
     </NotesContext.Provider>
   );

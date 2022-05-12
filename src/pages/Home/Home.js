@@ -6,12 +6,16 @@ import styles from "./home.module.css";
 export const Home = () => {
   const {
     notesState: { notes, pinnedNotes },
-    notesDispatch,
+    resetSelectedNote,
   } = useNotesContext();
 
   const { loading } = useAppContext();
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");
+
+  useEffect(() => {
+    resetSelectedNote();
+  }, []);
 
   return (
     <div className="page">
