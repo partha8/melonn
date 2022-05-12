@@ -46,6 +46,7 @@ export const Card = (note) => {
   const {
     notesState: { selectedNoteID },
     notesDispatch,
+    handlePinnedNote,
   } = useNotesContext();
   const { toastHandler } = useAppContext();
 
@@ -64,12 +65,15 @@ export const Card = (note) => {
     body = title.substr(0, 50) + "...";
   }
 
-  let dateCreated = createdAt
-    .toDate()
-    .toString()
-    .split(" ")
-    .splice(0, 4)
-    .join(" ");
+  let dateCreated;
+  if (createdAt) {
+    dateCreated = createdAt
+      .toDate()
+      .toString()
+      .split(" ")
+      .splice(0, 4)
+      .join(" ");
+  }
 
   const selectNote = (note) => {
     notesDispatch({
@@ -115,7 +119,21 @@ export const Card = (note) => {
         </article>
         {location.pathname === "/" || location.pathname === "/notes" ? (
           <span className="icon card-icon">
-            {pinned ? <BsFillPinFill /> : <BsPin />}
+            {pinned ? (
+              <BsFillPinFill
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePinnedNote(id, false);
+                }}
+              />
+            ) : (
+              <BsPin
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePinnedNote(id, true);
+                }}
+              />
+            )}
           </span>
         ) : (
           <MdClose
