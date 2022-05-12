@@ -63,17 +63,6 @@ export const Navigation = () => {
               ? `${styles.iconContainer} ${styles.active} `
               : `${styles.iconContainer}`
           }
-          to="/tags"
-        >
-          <FaTags className={styles.icon} /> <p className="flex-center">Tags</p>
-        </NavLink>
-
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `${styles.iconContainer} ${styles.active} `
-              : `${styles.iconContainer}`
-          }
           to="/trash"
         >
           <IoMdTrash className={styles.icon} />{" "}

@@ -6,6 +6,7 @@ import {
   AppProvider,
   ArchiveProvider,
   EditorProvider,
+  FilterProvider,
   NotesProvider,
   TrashProvider,
 } from "./context";
@@ -19,7 +20,9 @@ root.render(
         <EditorProvider>
           <TrashProvider>
             <ArchiveProvider>
-              <App />
+              <FilterProvider>
+                <App />
+              </FilterProvider>
             </ArchiveProvider>
           </TrashProvider>
         </EditorProvider>

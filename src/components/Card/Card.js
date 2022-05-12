@@ -104,9 +104,9 @@ export const Card = (note) => {
       <section className={styles.cardBody}>
         <article>
           <h6>{title}</h6>{" "}
-          {priority === "High" ? (
+          {priority.name === "High" ? (
             <FcHighPriority />
-          ) : priority === "Medium" ? (
+          ) : priority.name === "Medium" ? (
             <FcMediumPriority />
           ) : (
             <FcLowPriority />

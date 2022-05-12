@@ -4,15 +4,15 @@ import { Card } from "../Card/Card";
 import styles from "./sidebar.module.css";
 import { MdStickyNote2 } from "react-icons/md";
 import { FaFilter } from "react-icons/fa";
+import { useFilteredNotes } from "../../hooks/useFilteredNotes";
+import { FilterModal } from "../FilterModal/FilterModal";
 
 export const Sidebar = () => {
   const {
     notesState: { notes, pinnedNotes },
   } = useNotesContext();
 
-  const selectNote = (note) => {
-    console.log(note);
-  };
+  const { newPinnedNotes, newNotes } = useFilteredNotes(pinnedNotes, notes);
 
   return (
     <section className={styles.sidebar}>
@@ -22,13 +22,13 @@ export const Sidebar = () => {
         </h4>
         <div className={styles.filterContainer}>
           <p>{notes.length + pinnedNotes.length} notes</p>
-          <FaFilter className="more" />
+          <FilterModal />
         </div>
       </div>
-      {pinnedNotes?.map((pinnedNote) => {
+      {newPinnedNotes?.map((pinnedNote) => {
         return <Card key={pinnedNote.id} {...pinnedNote} />;
       })}
-      {notes?.map((note) => {
+      {newNotes?.map((note) => {
         return <Card key={note.id} {...note} />;
       })}
     </section>

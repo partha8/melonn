@@ -16,12 +16,24 @@ export const NotesProvider = ({ children }) => {
   });
 
   const updateNote = (title, body, tag, priority, id) => {
+    let priorityNumber = 0;
+    if (priority === "Low") {
+      priorityNumber = 1;
+    } else if (priority === "Medium") {
+      priorityNumber = 2;
+    } else {
+      priorityNumber = 3;
+    }
+
     const docRef = doc(db, "notes", id);
     updateDoc(docRef, {
       title: title,
       body: body,
       tag: tag,
-      priority: priority,
+      priority: {
+        number: priorityNumber,
+        name: priority,
+      },
       updatedAt: serverTimestamp(),
     });
   };

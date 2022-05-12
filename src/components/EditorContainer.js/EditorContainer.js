@@ -37,7 +37,7 @@ export const EditorContainer = () => {
         title: selectedNote.title,
         body: selectedNote.body,
         tag: selectedNote.tag,
-        priority: selectedNote.priority,
+        priority: selectedNote.priority.name,
       },
     });
   }, [selectedNote]);
@@ -120,7 +120,7 @@ export const EditorContainer = () => {
             {priorities.map((priority) => {
               return (
                 <option
-                  selected={priority.name === selectedNote.priority}
+                  selected={priority.name === selectedNote.priority.name}
                   value={priority.name}
                   key={priority.id}
                 >
