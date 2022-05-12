@@ -11,9 +11,9 @@ import { db } from "../firebase.config";
 
 export const useGetNotes = () => {
   const { notesDispatch } = useNotesContext();
-  const { appDispatch } = useAppContext();
+  const { setLoading } = useAppContext();
   useEffect(() => {
-    appDispatch({ type: "SET_LOADING", payload: true });
+    setLoading(true);
     const colRef = collection(db, "notes");
     const queryRef = query(
       colRef,
@@ -28,7 +28,7 @@ export const useGetNotes = () => {
         return data;
       });
       notesDispatch({ type: "SET_NOTES", payload: notes });
-      appDispatch({ type: "SET_LOADING", payload: false });
+      setLoading(false);
     });
     return () => unsub();
   }, []);

@@ -190,3 +190,13 @@ body {
 .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
   border: transparent;
 }
+
+.loading-component {
+
+  margin: 2rem 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
