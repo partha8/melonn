@@ -156,3 +156,37 @@ body {
     width: 100%;
   }
 }
+
+
+.wrapper,
+.editor {
+  height: 70vh;
+  overflow: none;
+  flex: 1;
+  word-wrap: break-word;
+}
+
+.editor {
+  width: 100%;
+  flex: 1;
+  overflow-y: auto;
+  word-wrap: break-word;
+  /* border: 1px solid var(--border-color); */
+  padding: 1rem;
+}
+
+
+.ck-editor__editable {
+  height: 70vh;
+  overflow-y: auto;
+  border: none;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+  border-bottom: none;
+  border-left: none;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-focused {
+  border: transparent;
+}

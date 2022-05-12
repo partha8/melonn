@@ -10,6 +10,7 @@ export const NotesProvider = ({ children }) => {
     selectedNote: null,
     addingNote: false,
     pinnedNotes: [],
+    tags: [],
   });
   return (
     <NotesContext.Provider value={{ notesState, notesDispatch }}>

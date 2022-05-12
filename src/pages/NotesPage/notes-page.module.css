@@ -1,0 +1,50 @@
+.notesPage {
+    display: flex;
+    padding: 0;
+    background: none;
+    flex: 1;
+}
+
+.editorContainer {
+    flex: 1;
+    width: calc(100vw - 35rem);
+    position: relative;
+
+}
+
+.editorUtils {
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.tagsContainer,
+.priorityContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--light-shadow);
+    width: min-content;
+    padding: 0.5rem;
+}
+
+.tags,
+.priorities {
+    font-size: 1rem;
+    border: none;
+    background: var(--light-card-color);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.tagInput {
+    width: 8rem;
+    padding: 4px;
+    outline: none;
+}

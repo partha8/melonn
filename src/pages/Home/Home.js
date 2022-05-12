@@ -3,6 +3,9 @@ import { Card } from "../../components";
 import { useNotesContext } from "../../context";
 import styles from "./home.module.css";
 
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 export const Home = () => {
   const {
     notesState: { notes, pinnedNotes },
@@ -45,6 +48,7 @@ export const Home = () => {
           </div>
         </section>
       )}
+
     </div>
   );
 };

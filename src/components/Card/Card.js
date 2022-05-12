@@ -23,7 +23,7 @@ export const Card = (note) => {
     updatedAt,
     pinned,
     trashed,
-    tags,
+    tag,
     color,
   } = note;
 
@@ -54,15 +54,21 @@ export const Card = (note) => {
 
   return (
     <div
-      style={{ background: `${color ? `${color}` : "fff"} ` }}
-      className={styles.card}
+      style={{
+        background: `${color ? `${color}` : "fff"} `,
+      }}
+      className={`${
+        location.pathname === "/notes"
+          ? `${styles.card} ${styles.notesPageCard}`
+          : styles.card
+      }`}
     >
       <section className={styles.cardBody}>
         <article>
           <h6>{title}</h6>
           <p>{body}</p>
         </article>
-        {location.pathname === "/" ? (
+        {location.pathname === "/" || location.pathname === "/notes" ? (
           <span className="icon">{pinned ? <BsFillPinFill /> : <BsPin />}</span>
         ) : (
           <MdClose
@@ -77,15 +83,7 @@ export const Card = (note) => {
           />
         )}
       </section>
-      <section className={styles.tags}>
-        {tags.map((tag, index) => {
-          return (
-            <p key={index} className={styles.tag}>
-              {tag}
-            </p>
-          );
-        })}
-      </section>
+      <p className={styles.tag}>{tag}</p>
       <section className={styles.footer}>
         <p className={styles.dateCreated}>Created on: {dateCreated} </p>
         <div className={styles.utils}>

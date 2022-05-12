@@ -1,0 +1,27 @@
+.sidebar {
+    border-right: 1px solid var(--border-color);
+    min-width: 24rem;
+    background: var(--light-card-color);
+    overflow-y: auto;
+}
+
+.sidebarHeader {
+    padding: 0.5rem;
+}
+
+.sidebarHeader h4 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filterContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
+}

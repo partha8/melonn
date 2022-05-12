@@ -12,6 +12,12 @@ export const notesReducer = (state, action) => {
         pinnedNotes: [...action.payload],
       };
     }
+    case "SET_TAGS": {
+      return {
+        ...state,
+        tags: [...action.payload],
+      };
+    }
     default:
       throw new Error();
   }
