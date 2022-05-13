@@ -9,6 +9,7 @@ export const FilterModal = () => {
 
   const {
     notesState: { tags },
+    resetSelectedNote,
   } = useNotesContext();
 
   const {
@@ -30,7 +31,10 @@ export const FilterModal = () => {
   return (
     <div>
       <FaFilter
-        onClick={() => setShowModal(true)}
+        onClick={() => {
+          resetSelectedNote();
+          setShowModal(true);
+        }}
         className="more flex-center"
       />
       {showModal && (
