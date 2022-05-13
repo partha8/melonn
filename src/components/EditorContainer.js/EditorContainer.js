@@ -17,6 +17,7 @@ const priorities = [
 ];
 
 export const EditorContainer = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const {
     notesState: { tags, selectedNote, selectedNoteID },
     updateNote,
@@ -43,15 +44,20 @@ export const EditorContainer = () => {
   }, [selectedNote]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      updateNote(title, body, tag, priority, selectedNoteID);
-    }, 1000);
+    let timer;
+    if (isEditing) {
+      timer = setTimeout(() => {
+        updateNote(title, body, tag, priority, selectedNoteID);
+      }, 1000);
+      setIsEditing(false);
+    }
     return () => clearTimeout(timer);
   }, [title, body, tag, priority]);
 
   const handleTagInput = (e) => {
     if (e.keyCode === 13) {
       handleNewTag(tagInput);
+      setIsEditing(true);
       setTagInput("");
     }
   };
@@ -63,9 +69,10 @@ export const EditorContainer = () => {
         <input
           className={styles.title}
           value={title}
-          onChange={(e) =>
-            editorDispatch({ type: "SET_TITLE", payload: e.target.value })
-          }
+          onChange={(e) => {
+            setIsEditing(true);
+            editorDispatch({ type: "SET_TITLE", payload: e.target.value });
+          }}
         />
       </div>
 
@@ -75,6 +82,7 @@ export const EditorContainer = () => {
         placeholder="Type your content here"
         onChange={(event, editor) => {
           const data = editor.getData();
+          setIsEditing(true);
           editorDispatch({ type: "SET_BODY", payload: data });
         }}
       />
@@ -83,9 +91,10 @@ export const EditorContainer = () => {
         <div className={styles.tagsContainer}>
           <FaTags />
           <select
-            onChange={(e) =>
-              editorDispatch({ type: "SET_TAG", payload: e.target.value })
-            }
+            onChange={(e) => {
+              setIsEditing(true);
+              editorDispatch({ type: "SET_TAG", payload: e.target.value });
+            }}
             className={styles.tags}
           >
             {tags?.map((value) => {
@@ -112,9 +121,10 @@ export const EditorContainer = () => {
         <div className={styles.priorityContainer}>
           <MdOutlinePriorityHigh /> <span>Priority</span>
           <select
-            onChange={(e) =>
-              editorDispatch({ type: "SET_PRIORITY", payload: e.target.value })
-            }
+            onChange={(e) => {
+              setIsEditing(true);
+              editorDispatch({ type: "SET_PRIORITY", payload: e.target.value });
+            }}
             className={styles.priorities}
           >
             {priorities.map((priority) => {
