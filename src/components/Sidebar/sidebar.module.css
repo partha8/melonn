@@ -4,6 +4,7 @@
     background: var(--light-card-color);
     overflow-y: auto;
     word-wrap: break-word;
+    position: relative;
 }
 
 .sidebarHeader {

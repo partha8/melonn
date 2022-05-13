@@ -5,3 +5,4 @@ export { Card } from "./Card/Card";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { EditorContainer } from "./EditorContainer.js/EditorContainer";
 export { Loading } from "./Loading/Loading";
+export { FilterModal } from "./FilterModal/FilterModal";

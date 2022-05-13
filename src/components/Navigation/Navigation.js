@@ -5,8 +5,10 @@ import { IoMdTrash, IoMdArchive } from "react-icons/io";
 import { MdHome, MdStickyNote2 } from "react-icons/md";
 import { FaTags } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { useNotesContext } from "../../context/NotesProvider";
 
 export const Navigation = () => {
+  const { newNoteHandler } = useNotesContext();
   return (
     <nav className={styles.nav}>
       <section className={styles.accountSetting}>
@@ -26,11 +28,11 @@ export const Navigation = () => {
         <input placeholder="search" className={styles.search} type="text" />
       </section>
 
-      <section className={styles.btnContainer}>
+      <section onClick={newNoteHandler} className={styles.btnContainer}>
         <button className={`btn ${styles.newBtn}`}>
           <AiOutlinePlus />
         </button>
-        <p>New</p>
+        <p>New Note</p>
       </section>
 
       <section className={styles.icons}>
@@ -55,17 +57,6 @@ export const Navigation = () => {
         >
           <MdStickyNote2 className={styles.icon} />{" "}
           <p className="flex-center">Notes</p>
-        </NavLink>
-
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? `${styles.iconContainer} ${styles.active} `
-              : `${styles.iconContainer}`
-          }
-          to="/tags"
-        >
-          <FaTags className={styles.icon} /> <p className="flex-center">Tags</p>
         </NavLink>
 
         <NavLink
