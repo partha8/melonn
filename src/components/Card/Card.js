@@ -1,5 +1,6 @@
 import styles from "./card.module.css";
 import { removeHTMLTags } from "../../utils/utils";
+
 import {
   BsPin,
   BsFillPinFill,
@@ -9,24 +10,47 @@ import {
   BsArchiveFill,
 } from "react-icons/bs";
 import { MdClose } from "react-icons/md";
+import {
+  FcHighPriority,
+  FcLowPriority,
+  FcMediumPriority,
+} from "react-icons/fc";
+
 import ColorPalette from "./Colors/Colors";
 import {
   useAppContext,
   useArchiveContext,
+  useNotesContext,
   useTrashContext,
 } from "../../context";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+// component starts here
 export const Card = (note) => {
-  let { id, title, archived, body, createdAt, pinned, trashed, tag, color } =
-    note;
+  let {
+    id,
+    title,
+    archived,
+    body,
+    createdAt,
+    pinned,
+    trashed,
+    tag,
+    color,
+    priority,
+  } = note;
 
   const { deleteNote, restoreNote, deleteFromTrash } = useTrashContext();
   const { archiveNote, restoreNoteFromArchive, deleteFromArchive } =
     useArchiveContext();
+  const {
+    notesState: { selectedNoteID },
+    notesDispatch,
+  } = useNotesContext();
   const { toastHandler } = useAppContext();
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (body) {
     body = removeHTMLTags(body);
@@ -47,8 +71,23 @@ export const Card = (note) => {
     .splice(0, 4)
     .join(" ");
 
+  const selectNote = (note) => {
+    notesDispatch({
+      type: "SELECT_NOTE",
+      payload: { note: note, id: note.id },
+    });
+  };
+
   return (
     <div
+      onClick={() => {
+        if (location.pathname === "/notes") {
+          selectNote(note);
+        } else if (location.pathname === "/") {
+          navigate("/notes");
+          selectNote(note);
+        }
+      }}
       style={{
         background: `${color ? `${color}` : "fff"} `,
       }}
@@ -56,19 +95,33 @@ export const Card = (note) => {
         location.pathname === "/notes"
           ? `${styles.card} ${styles.notesPageCard}`
           : styles.card
-      }`}
+      } ${
+        selectedNoteID === note.id && location.pathname === "/notes"
+          ? styles.active
+          : ""
+      } `}
     >
       <section className={styles.cardBody}>
         <article>
-          <h6>{title}</h6>
+          <h6>{title}</h6>{" "}
+          {priority === "High" ? (
+            <FcHighPriority />
+          ) : priority === "Medium" ? (
+            <FcMediumPriority />
+          ) : (
+            <FcLowPriority />
+          )}
           <p>{body}</p>
         </article>
         {location.pathname === "/" || location.pathname === "/notes" ? (
-          <span className="icon">{pinned ? <BsFillPinFill /> : <BsPin />}</span>
+          <span className="icon card-icon">
+            {pinned ? <BsFillPinFill /> : <BsPin />}
+          </span>
         ) : (
           <MdClose
-            className="icon"
-            onClick={() => {
+            className="icon card-icon"
+            onClick={(e) => {
+              e.stopPropagation();
               if (location.pathname === "/trash") {
                 deleteFromTrash(id);
                 toastHandler(true, "Deleted From Trash!", "success");
@@ -88,14 +141,16 @@ export const Card = (note) => {
 
           {archived ? (
             <BsArchiveFill
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 restoreNoteFromArchive(note);
                 toastHandler(true, "Note un-archived!", "success");
               }}
             />
           ) : (
             <BsArchive
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (
                   location.pathname === "/" ||
                   location.pathname === "/notes"
@@ -111,14 +166,16 @@ export const Card = (note) => {
           )}
           {trashed ? (
             <BsTrashFill
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 restoreNote(note);
                 toastHandler(true, "Note un-trashed!", "success");
               }}
             />
           ) : (
             <BsTrash
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (
                   location.pathname === "/" ||
                   location.pathname === "/notes"

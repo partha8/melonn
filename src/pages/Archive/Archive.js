@@ -1,14 +1,23 @@
-import React from "react";
-import { useAppContext, useArchiveContext } from "../../context";
+import React, { useEffect } from "react";
+import {
+  useAppContext,
+  useArchiveContext,
+  useNotesContext,
+} from "../../context";
 import { useGetArchivedNotes } from "../../hooks";
 import styles from "./archive.module.css";
 import { Card, Loading } from "../../components";
 
 export const Archive = () => {
   const { archivedNotes, clearAll } = useArchiveContext();
+  const { resetSelectedNote } = useNotesContext();
   const { loading } = useAppContext();
 
   useGetArchivedNotes();
+
+  useEffect(() => {
+    resetSelectedNote();
+  }, []);
 
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");

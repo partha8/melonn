@@ -7,6 +7,8 @@
     flex-direction: column;
     gap: 8px;
     position: relative;
+    flex: 1;
+    cursor: pointer;
 }
 
 .notesPageCard {
@@ -14,9 +16,13 @@
     border-bottom: 1px solid var(--border-color);
 }
 
-.cardBody {
-    display: flex;
-    justify-content: space-between;
+.cardBody h6 {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.active {
+    border: 1px solid black;
 }
 
 .tags {
@@ -36,7 +42,6 @@
     background: var(--light-card-color);
     padding: 1px 8px;
     border-radius: 10px;
-    cursor: pointer;
     font-size: 0.8rem;
     width: fit-content;
 }

@@ -9,6 +9,11 @@ export const Sidebar = () => {
   const {
     notesState: { notes, pinnedNotes },
   } = useNotesContext();
+
+  const selectNote = (note) => {
+    console.log(note);
+  };
+
   return (
     <section className={styles.sidebar}>
       <div className={styles.sidebarHeader}>

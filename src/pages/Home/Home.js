@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Loading } from "../../components";
 import { useAppContext, useNotesContext } from "../../context";
 import styles from "./home.module.css";
@@ -6,11 +6,16 @@ import styles from "./home.module.css";
 export const Home = () => {
   const {
     notesState: { notes, pinnedNotes },
+    resetSelectedNote,
   } = useNotesContext();
 
   const { loading } = useAppContext();
   const dateStamp = new Date().toString().split(" ");
   const time = dateStamp[4].split(":");
+
+  useEffect(() => {
+    resetSelectedNote();
+  }, []);
 
   return (
     <div className="page">

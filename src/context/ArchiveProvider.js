@@ -8,14 +8,28 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { useNotesContext } from "./NotesProvider";
 
 const ArchiveContext = createContext();
 
 export const ArchiveProvider = ({ children }) => {
   const [archivedNotes, setArchivedNotes] = useState([]);
+  const {
+    notesState: { selectedNoteID },
+    notesDispatch,
+  } = useNotesContext();
 
   const archiveNote = (note, collectionPath) => {
-    console.log(note, collectionPath);
+    if (note.id === selectedNoteID) {
+      notesDispatch({
+        type: "SELECT_NOTE",
+        payload: {
+          selectedNote: null,
+          selectedNoteID: null,
+        },
+      });
+    }
+
     const docRef = doc(db, collectionPath, note.id);
     const colRef = collection(db, "archive");
     addDoc(colRef, {
@@ -27,6 +41,7 @@ export const ArchiveProvider = ({ children }) => {
       tag: note.tag,
       title: note.title,
       trashed: false,
+      priority: note.priority,
       updatedAt: note.updatedAt,
       archivedAt: serverTimestamp(),
       id: note.id,
@@ -46,6 +61,7 @@ export const ArchiveProvider = ({ children }) => {
       tag: note.tag,
       title: note.title,
       trashed: false,
+      priority: note.priority,
       updatedAt: note.updatedAt,
     });
     deleteDoc(docRef);

@@ -18,6 +18,13 @@ export const notesReducer = (state, action) => {
         tags: [...action.payload],
       };
     }
+    case "SELECT_NOTE": {
+      return {
+        ...state,
+        selectedNote: action.payload.note,
+        selectedNoteID: action.payload.id,
+      };
+    }
     default:
       throw new Error();
   }

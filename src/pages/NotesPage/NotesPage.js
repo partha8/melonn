@@ -6,13 +6,13 @@ import { useNotesContext } from "../../context";
 
 export const NotesPage = () => {
   const {
-    notesState: { tags },
+    notesState: { tags, selectedNote },
   } = useNotesContext();
 
   return (
     <div className={`page ${styles.notesPage}`}>
       <Sidebar />
-      <EditorContainer />
+      {selectedNote && <EditorContainer />}
     </div>
   );
 };

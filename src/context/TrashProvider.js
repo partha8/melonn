@@ -8,13 +8,29 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
+import { useNotesContext } from "./NotesProvider";
 
 const TrashContext = createContext();
 
 export const TrashProvider = ({ children }) => {
   const [trashedNotes, setTrashedNotes] = useState([]);
+  const {
+    notesState: { selectedNoteID },
+    notesDispatch,
+  } = useNotesContext();
 
   const deleteNote = (note, collectionPath) => {
+
+    if (note.id === selectedNoteID) {
+      notesDispatch({
+        type: "SELECT_NOTE",
+        payload: {
+          selectedNote: null,
+          selectedNoteID: null,
+        },
+      });
+    }
+
     const docRef = doc(db, collectionPath, note.id);
     const colRef = collection(db, "trash");
     addDoc(colRef, {
@@ -26,6 +42,7 @@ export const TrashProvider = ({ children }) => {
       tag: note.tag,
       title: note.title,
       trashed: true,
+      priority: note.priority,
       updatedAt: note.updatedAt,
       trashedAt: serverTimestamp(),
       id: note.id,
@@ -44,6 +61,7 @@ export const TrashProvider = ({ children }) => {
       pinned: note.pinned,
       tag: note.tag,
       title: note.title,
+      priority: note.priority,
       trashed: false,
       updatedAt: note.updatedAt,
     });

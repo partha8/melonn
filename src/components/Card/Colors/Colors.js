@@ -5,7 +5,7 @@ import styles from "./colors.module.css";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../firebase.config";
 
-const ColorPalette = ({id}) => {
+const ColorPalette = ({ id }) => {
   const [showPalette, setShowPalette] = useState(false);
 
   const updateColor = async (id, color) => {
@@ -37,7 +37,12 @@ const ColorPalette = ({id}) => {
   const domNode = useClickOutside(() => setShowPalette(false));
   return (
     <div>
-      <BsPaletteFill onClick={() => setShowPalette(!showPalette)} />
+      <BsPaletteFill
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowPalette(!showPalette);
+        }}
+      />
       {showPalette && (
         <div onClick={changeColorHandler} className={styles.palette} ref={domNode}>
           <div className={styles.color1}></div>
