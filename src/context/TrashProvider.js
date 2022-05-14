@@ -20,7 +20,6 @@ export const TrashProvider = ({ children }) => {
   } = useNotesContext();
 
   const deleteNote = (note, collectionPath) => {
-
     if (note.id === selectedNoteID) {
       notesDispatch({
         type: "SELECT_NOTE",
@@ -45,6 +44,7 @@ export const TrashProvider = ({ children }) => {
       priority: note.priority,
       updatedAt: note.updatedAt,
       trashedAt: serverTimestamp(),
+      uid: note.uid,
       id: note.id,
     });
     deleteDoc(docRef);
@@ -63,6 +63,7 @@ export const TrashProvider = ({ children }) => {
       title: note.title,
       priority: note.priority,
       trashed: false,
+      uid: note.uid,
       updatedAt: note.updatedAt,
     });
     deleteDoc(docRef);

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAppContext, useNotesContext } from "../context";
+import { useAppContext, useAuthContext, useNotesContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -12,6 +12,8 @@ import { db } from "../firebase.config";
 export const useGetNotes = () => {
   const { notesDispatch } = useNotesContext();
   const { setLoading } = useAppContext();
+  const { currentUser } = useAuthContext();
+
   useEffect(() => {
     setLoading(true);
     const colRef = collection(db, "notes");
@@ -27,7 +29,10 @@ export const useGetNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      notesDispatch({ type: "SET_NOTES", payload: notes });
+      notesDispatch({
+        type: "SET_NOTES",
+        payload: notes.filter((note) => note.uid === currentUser.uid),
+      });
       setLoading(false);
     });
     return () => unsub();

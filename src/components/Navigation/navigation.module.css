@@ -5,9 +5,10 @@
     height: 100vh;
     top: 0;
     bottom: 0;
-    width: 11rem;
+    width: 13rem;
     display: flex;
     flex-direction: column;
+    z-index: 2;
 }
 
 .accountSetting {
@@ -140,4 +141,28 @@
     .search {
         display: none;
     }
+}
+
+.dropdown {
+    position: absolute;
+    right: -3rem;
+    top: 2.5rem;
+    z-index: 100;
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+.item {
+    border: none;
+    gap: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.item:hover {
+    background: var(--hover-color);
 }

@@ -5,6 +5,7 @@ import { App } from "./App";
 import {
   AppProvider,
   ArchiveProvider,
+  AuthProvider,
   EditorProvider,
   FilterProvider,
   NotesProvider,
@@ -15,18 +16,20 @@ import { BrowserRouter as Router } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
-    <AppProvider>
-      <NotesProvider>
-        <EditorProvider>
-          <TrashProvider>
-            <ArchiveProvider>
-              <FilterProvider>
-                <App />
-              </FilterProvider>
-            </ArchiveProvider>
-          </TrashProvider>
-        </EditorProvider>
-      </NotesProvider>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <NotesProvider>
+          <EditorProvider>
+            <TrashProvider>
+              <ArchiveProvider>
+                <FilterProvider>
+                  <App />
+                </FilterProvider>
+              </ArchiveProvider>
+            </TrashProvider>
+          </EditorProvider>
+        </NotesProvider>
+      </AppProvider>
+    </AuthProvider>
   </Router>
 );

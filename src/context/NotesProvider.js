@@ -9,6 +9,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import { useNavigate } from "react-router-dom";
 import { db } from "../firebase.config";
 import { notesReducer } from "../reducers";
+import { useAuthContext } from "./AuthProvider";
 
 const NotesContext = createContext();
 
@@ -22,6 +23,7 @@ export const NotesProvider = ({ children }) => {
     pinnedNotes: [],
     tags: [],
   });
+  const { currentUser } = useAuthContext();
 
   const updateNote = (title, body, tag, priority, id) => {
     let priorityNumber = 0;
@@ -65,6 +67,7 @@ export const NotesProvider = ({ children }) => {
       archived: false,
       trashed: false,
       color: "#fff",
+      uid: currentUser.uid,
     });
     navigate("/notes");
   };

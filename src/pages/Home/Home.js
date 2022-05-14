@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Card, Loading } from "../../components";
 import { useAppContext, useNotesContext } from "../../context";
 import styles from "./home.module.css";
+import { useGetNotes, useGetPinnedNotes, useGetTags } from "../../hooks";
 
 export const Home = () => {
   const {
@@ -16,6 +17,10 @@ export const Home = () => {
   useEffect(() => {
     resetSelectedNote();
   }, []);
+
+  useGetNotes();
+  useGetPinnedNotes();
+  useGetTags();
 
   return (
     <div className="page">

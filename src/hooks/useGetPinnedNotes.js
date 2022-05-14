@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAppContext, useNotesContext } from "../context";
+import { useAppContext, useAuthContext, useNotesContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -12,6 +12,7 @@ import { db } from "../firebase.config";
 export const useGetPinnedNotes = () => {
   const { notesDispatch } = useNotesContext();
   const { setLoading } = useAppContext();
+  const { currentUser } = useAuthContext();
   useEffect(() => {
     setLoading(true);
     const colRef = collection(db, "notes");
@@ -27,7 +28,11 @@ export const useGetPinnedNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      notesDispatch({ type: "SET_PINNED_NOTES", payload: pinnedNotes });
+
+      notesDispatch({
+        type: "SET_PINNED_NOTES",
+        payload: pinnedNotes.filter((note) => note.uid === currentUser.uid),
+      });
       setLoading(false);
     });
     return () => unsub();

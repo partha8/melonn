@@ -6,6 +6,7 @@ import { MdStickyNote2 } from "react-icons/md";
 import { FaFilter } from "react-icons/fa";
 import { useFilteredNotes } from "../../hooks/useFilteredNotes";
 import { FilterModal } from "../FilterModal/FilterModal";
+import { useGetNotes, useGetPinnedNotes, useGetTags } from "../../hooks/";
 
 export const Sidebar = () => {
   const {
@@ -13,6 +14,10 @@ export const Sidebar = () => {
   } = useNotesContext();
 
   const { newPinnedNotes, newNotes } = useFilteredNotes(pinnedNotes, notes);
+
+  useGetNotes();
+  useGetPinnedNotes();
+  useGetTags();
 
   return (
     <section className={styles.sidebar}>

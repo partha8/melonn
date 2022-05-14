@@ -8,11 +8,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { editorReducer } from "../reducers";
+import { useAuthContext } from "./AuthProvider";
 
 const EditorContext = createContext();
 
 export const EditorProvider = ({ children }) => {
-
   const [editorState, editorDispatch] = useReducer(editorReducer, {
     body: "",
     title: "",
@@ -22,11 +22,14 @@ export const EditorProvider = ({ children }) => {
     priority: "",
   });
 
+  const { currentUser } = useAuthContext();
+
   const handleNewTag = (newTag) => {
     const colRef = collection(db, "tags");
     addDoc(colRef, {
       createdAt: serverTimestamp(),
       tag: newTag,
+      uid: currentUser.uid,
     });
     editorDispatch({ type: "SET_TAG", payload: newTag });
   };

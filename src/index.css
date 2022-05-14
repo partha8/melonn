@@ -90,26 +90,6 @@ body {
   background: var(--font-color-light);
 } */
 
-.dropdown {
-  position: absolute;
-  right: 1.5rem;
-  top: 2.5rem;
-  z-index: 2;
-  background: var(--bg-color);
-}
-
-.item {
-  border: none;
-  gap: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.item:hover {
-  background: var(--hover-color);
-}
-
 .App {
   display: flex;
 }
@@ -119,6 +99,7 @@ body {
   width: 100%;
   padding: 1rem;
   flex: 1;
+  z-index: 1;
 }
 
 .more {
