@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNotesContext } from "../context";
+import { useAuthContext, useNotesContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -11,6 +11,7 @@ import { db } from "../firebase.config";
 
 export const useGetTags = () => {
   const { notesDispatch } = useNotesContext();
+  const { currentUser } = useAuthContext();
   useEffect(() => {
     const colRef = collection(db, "tags");
     const queryRef = query(colRef, orderBy("createdAt", "asc"));
@@ -21,7 +22,10 @@ export const useGetTags = () => {
         data["id"] = doc.id;
         return data;
       });
-      notesDispatch({ type: "SET_TAGS", payload: tags });
+      notesDispatch({
+        type: "SET_TAGS",
+        payload: tags.filter((tag) => tag.uid === currentUser.uid),
+      });
     });
     return () => unsub();
   }, []);

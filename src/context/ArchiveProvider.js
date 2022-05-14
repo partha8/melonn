@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNotesContext } from "./NotesProvider";
+import { useAuthContext } from "./AuthProvider";
 
 const ArchiveContext = createContext();
 
@@ -43,6 +44,7 @@ export const ArchiveProvider = ({ children }) => {
       trashed: false,
       priority: note.priority,
       updatedAt: note.updatedAt,
+      uid: note.uid,
       archivedAt: serverTimestamp(),
       id: note.id,
     });
@@ -62,6 +64,7 @@ export const ArchiveProvider = ({ children }) => {
       title: note.title,
       trashed: false,
       priority: note.priority,
+      uid: note.uid,
       updatedAt: note.updatedAt,
     });
     deleteDoc(docRef);

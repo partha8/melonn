@@ -25,6 +25,17 @@ export const notesReducer = (state, action) => {
         selectedNoteID: action.payload.id,
       };
     }
+    case "RESET": {
+      return {
+        ...state,
+        notes: [],
+        selectedNoteID: null,
+        selectedNote: null,
+        addingNote: false,
+        pinnedNotes: [],
+        tags: [],
+      };
+    }
     default:
       throw new Error();
   }

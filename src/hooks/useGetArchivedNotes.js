@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useArchiveContext, useAppContext } from "../context";
+import { useArchiveContext, useAppContext, useAuthContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -12,6 +12,7 @@ import { db } from "../firebase.config";
 export const useGetArchivedNotes = () => {
   const { setArchivedNotes } = useArchiveContext();
   const { setLoading } = useAppContext();
+  const { currentUser } = useAuthContext();
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +25,7 @@ export const useGetArchivedNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      setArchivedNotes(notes);
+      setArchivedNotes(notes.filter((note) => note.uid === currentUser.uid));
       setLoading(false);
     });
     return () => unsub();

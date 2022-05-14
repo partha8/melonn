@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useTrashContext, useAppContext } from "../context";
+import { useTrashContext, useAppContext, useAuthContext } from "../context";
 import {
   collection,
   onSnapshot,
@@ -12,6 +12,7 @@ import { db } from "../firebase.config";
 export const useGetTrashedNotes = () => {
   const { setTrashedNotes } = useTrashContext();
   const { setLoading } = useAppContext();
+  const { currentUser } = useAuthContext();
 
   useEffect(() => {
     setLoading(true);
@@ -24,7 +25,7 @@ export const useGetTrashedNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      setTrashedNotes(notes);
+      setTrashedNotes(notes.filter((note) => note.uid === currentUser.uid));
       setLoading(false);
     });
     return () => unsub();

@@ -4,3 +4,4 @@ export { TrashProvider, useTrashContext } from "./TrashProvider";
 export { ArchiveProvider, useArchiveContext } from "./ArchiveProvider";
 export { EditorProvider, useEditorContext } from "./EditorProvider";
 export { FilterProvider, useFilterContext } from "./FilterProvider";
+export { AuthProvider, useAuthContext } from "./AuthProvider";
