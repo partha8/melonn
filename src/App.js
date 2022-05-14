@@ -4,7 +4,15 @@ import { Navigation, Toast } from "./components";
 import { RequireAuth } from "./components/RequireAuth/RequireAuth";
 import { useAppContext, useAuthContext, useNotesContext } from "./context";
 import { useGetNotes, useGetPinnedNotes, useGetTags } from "./hooks";
-import { Archive, Home, Login, NotesPage, SignUp, Trash } from "./pages";
+import {
+  Archive,
+  Error404,
+  Home,
+  Login,
+  NotesPage,
+  SignUp,
+  Trash,
+} from "./pages";
 
 export const App = () => {
   useGetNotes();
@@ -14,7 +22,6 @@ export const App = () => {
   const { currentUser } = useAuthContext();
   return (
     <div className="App">
-      
       {currentUser && <Navigation />}
       {toast.showToast && <Toast />}
       <Routes>
@@ -26,6 +33,7 @@ export const App = () => {
           <Route path="/archive" element={<Archive />} />
           <Route path="/notes" element={<NotesPage />} />
         </Route>
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
   );
