@@ -25,7 +25,7 @@ export const useGetArchivedNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      setArchivedNotes(notes.filter((note) => note.uid === currentUser.uid));
+      setArchivedNotes(notes.filter((note) => note?.uid === currentUser?.uid));
       setLoading(false);
     });
     return () => unsub();

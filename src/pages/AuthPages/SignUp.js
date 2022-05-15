@@ -1,12 +1,13 @@
 import { updateProfile } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context";
+import { useAppContext, useAuthContext } from "../../context";
 import { auth } from "../../firebase.config";
 import "./auth.css";
 
 export const SignUp = () => {
   const { signUpHandler } = useAuthContext();
+  const { toastHandler } = useAppContext();
   const navigate = useNavigate();
 
   const [firstName, setFirstName] = useState("");
@@ -28,6 +29,7 @@ export const SignUp = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
+      toastHandler(true, "Signing Up, wait a few seconds", "success");
       await signUpHandler(email, pwd);
       await updateProfile(auth.currentUser, {
         displayName: `${firstName} ${lastName}`,
@@ -35,6 +37,7 @@ export const SignUp = () => {
       navigate("/");
     } catch (error) {
       setErrMsg(error.message);
+      toastHandler(true, `something went wrong, ${error.message}`, "error");
     }
   };
 

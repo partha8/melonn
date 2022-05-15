@@ -31,7 +31,7 @@ export const useGetNotes = () => {
       });
       notesDispatch({
         type: "SET_NOTES",
-        payload: notes.filter((note) => note.uid === currentUser.uid),
+        payload: notes.filter((note) => note?.uid === currentUser?.uid),
       });
       setLoading(false);
     });

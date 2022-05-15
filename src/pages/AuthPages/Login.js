@@ -1,7 +1,7 @@
 import React from "react";
 import { useRef, useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context";
+import { useAppContext, useAuthContext } from "../../context";
 import "./auth.css";
 
 export const Login = () => {
@@ -15,6 +15,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const { loginHandler } = useAuthContext();
+  const { toastHandler } = useAppContext();
 
   useEffect(() => {
     emailRef.current.focus();
@@ -27,10 +28,12 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      toastHandler(true, "Logging in, wait a few seconds", "success");
       await loginHandler(email, pwd);
       navigate("/");
     } catch (error) {
       setErrMsg(error.message);
+      toastHandler(true, `Something went wrong, ${error.message}`, "error");
     }
   };
 

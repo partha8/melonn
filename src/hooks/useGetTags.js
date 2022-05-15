@@ -24,7 +24,7 @@ export const useGetTags = () => {
       });
       notesDispatch({
         type: "SET_TAGS",
-        payload: tags.filter((tag) => tag.uid === currentUser.uid),
+        payload: tags.filter((tag) => tag?.uid === currentUser?.uid),
       });
     });
     return () => unsub();

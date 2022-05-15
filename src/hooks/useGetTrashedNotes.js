@@ -25,7 +25,7 @@ export const useGetTrashedNotes = () => {
         data["id"] = doc.id;
         return data;
       });
-      setTrashedNotes(notes.filter((note) => note.uid === currentUser.uid));
+      setTrashedNotes(notes.filter((note) => note?.uid === currentUser?.uid));
       setLoading(false);
     });
     return () => unsub();

@@ -31,7 +31,7 @@ export const useGetPinnedNotes = () => {
 
       notesDispatch({
         type: "SET_PINNED_NOTES",
-        payload: pinnedNotes.filter((note) => note.uid === currentUser.uid),
+        payload: pinnedNotes.filter((note) => note?.uid === currentUser?.uid),
       });
       setLoading(false);
     });
