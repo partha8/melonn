@@ -31,6 +31,7 @@ export const Login = () => {
       toastHandler(true, "Logging in, wait a few seconds", "success");
       await loginHandler(email, pwd);
       navigate("/");
+      toastHandler(true, "Logged In!", "success");
     } catch (error) {
       setErrMsg(error.message);
       toastHandler(true, `Something went wrong, ${error.message}`, "error");

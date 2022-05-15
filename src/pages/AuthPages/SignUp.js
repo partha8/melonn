@@ -35,6 +35,7 @@ export const SignUp = () => {
         displayName: `${firstName} ${lastName}`,
       });
       navigate("/");
+      toastHandler(true, "Signed Up!", "success");
     } catch (error) {
       setErrMsg(error.message);
       toastHandler(true, `something went wrong, ${error.message}`, "error");
