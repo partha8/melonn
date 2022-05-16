@@ -55,8 +55,8 @@ export const NotesProvider = ({ children }) => {
     const colRef = collection(db, "notes");
     await addDoc(colRef, {
       title: "Untitled",
-      body: "",
-      tag: "common",
+      body: "write your content here...",
+      tag: "",
       priority: {
         number: 1,
         name: "Low",
