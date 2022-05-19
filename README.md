@@ -1,70 +1,121 @@
-# Getting Started with Create React App
+<h1 align="center">Melonn</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  A note taking web application.
+  <br>
+  <a target="__blank" href="https://melonn-8c85c.web.app/"><strong>To the site!</strong></a>
+  <br>
+</p>
 
-## Available Scripts
+</div>
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Table of Contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Tech Stack](#tech-stack)
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Connect with me](#-connect-with-me)
+- [Thanks](#thanks)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Tech Stack
+- ReactJS
+- CSS modules
+- Firebase/firestore
+- Firebase/auth
+- [CKEditor](https://ckeditor.com/docs/index.html) 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Add a new note
+- User can add a note by clicking on a primary button "Add Note" or a "+" icon button which will open a textbox where we can add texts. And a "Save" button that will save the note.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Edit & Delete Note
+- User can delete and edit a note
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Filter & Sort by date, priority, tags
+- User can filter notes by tags added to the note
+- User can filter the notes by priority. Priorities would be high, medium, low
+- User can sort the notes by the date added/created.
 
-### `npm run eject`
+### Change Card Color
+- User can see various color containers (div) where if I click on any one of it. It will change the background color of the note.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Add Tags to notes
+- User can see the input text area beside the "Add Note" component where we can add tags.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Trash & Archive
+- User can trash/archive a note. User can also untrash/unarchive a note.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Authentication
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Signup
+- Login
+- Logout
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- clone the repository on your local machine with the command below in your terminal, and cd into the **melonn** folder
 
-### Code Splitting
+```
+git clone https://github.com/partha8/melonn.git
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+cd melonn
+```
 
-### Analyzing the Bundle Size
+- install dependencies (if you are using **yarn** then do with that)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
+npm install
+```
+- Install firebase in the local directory.
+- You'll also need to setup a project in firebase and setup firebase.config file in src folder.
+- The config file will look like this
+```
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-### Making a Progressive Web App
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth();
 
-### Advanced Configuration
+export { app, db, auth };
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
 
-### Deployment
+- start the server
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
+npm start
+```
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 👨‍💻 Connect with me
+
+<a href="https://twitter.com/partha_sarma8"><img src="https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white"/></a>
+
+## Thanks
+
+Special thanks to my team members (team D3) for reviewing this project!
