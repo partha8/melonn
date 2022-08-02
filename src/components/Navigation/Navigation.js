@@ -63,7 +63,6 @@ export const Navigation = () => {
       {openDropDown && (
         <div ref={domNode} className={styles.dropdown}>
           <ul>
-            <li className={styles.item}>Profile</li>
             <li onClick={logoutHandler} className={styles.item}>
               Log out
             </li>
