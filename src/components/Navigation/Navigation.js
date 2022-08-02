@@ -15,7 +15,11 @@ import {
 } from "../../context";
 
 export const Navigation = () => {
-  const { newNoteHandler, notesDispatch } = useNotesContext();
+  const {
+    newNoteHandler,
+    notesDispatch,
+    notesState: { tags },
+  } = useNotesContext();
   const { setTrashedNotes } = useTrashContext();
   const { setArchivedNotes } = useArchiveContext();
   const { currentUser, logout } = useAuthContext();
@@ -72,7 +76,10 @@ export const Navigation = () => {
         <input placeholder="search" className={styles.search} type="text" />
       </section>
 
-      <section onClick={newNoteHandler} className={styles.btnContainer}>
+      <section
+        onClick={() => newNoteHandler(tags[0].tag)}
+        className={styles.btnContainer}
+      >
         <button className={`btn ${styles.newBtn}`}>
           <AiOutlinePlus />
         </button>

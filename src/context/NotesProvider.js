@@ -51,12 +51,12 @@ export const NotesProvider = ({ children }) => {
     notesDispatch({ type: "SELECT_NOTE", payload: { note: null, id: null } });
   };
 
-  const newNoteHandler = async () => {
+  const newNoteHandler = async (tag) => {
     const colRef = collection(db, "notes");
     await addDoc(colRef, {
       title: "Untitled",
       body: "write your content here...",
-      tag: "",
+      tag: tag ? tag : "",
       priority: {
         number: 1,
         name: "Low",

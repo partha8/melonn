@@ -25,6 +25,8 @@ import {
 } from "../../context";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import ReactTooltip from "react-tooltip";
+
 // component starts here
 export const Card = (note) => {
   let {
@@ -109,11 +111,20 @@ export const Card = (note) => {
         <article>
           <h6>{title}</h6>{" "}
           {priority.name === "High" ? (
-            <FcHighPriority />
+            <>
+              <FcHighPriority data-tip="High Priority" />
+              <ReactTooltip place="right" type="dark" />
+            </>
           ) : priority.name === "Medium" ? (
-            <FcMediumPriority />
+            <>
+              <FcMediumPriority data-tip="Medium Priority" />
+              <ReactTooltip place="right" type="dark" />
+            </>
           ) : (
-            <FcLowPriority />
+            <>
+              <FcLowPriority data-tip="Low Priority" />
+              <ReactTooltip place="right" type="dark" />
+            </>
           )}
           <p>{body}</p>
         </article>

@@ -6,9 +6,13 @@ import {
   deleteDoc,
   addDoc,
   serverTimestamp,
+  getDocs,
+  where,
+  query,
 } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNotesContext } from "./NotesProvider";
+import { useAuthContext } from "./AuthProvider";
 
 const TrashContext = createContext();
 
@@ -18,6 +22,7 @@ export const TrashProvider = ({ children }) => {
     notesState: { selectedNoteID },
     notesDispatch,
   } = useNotesContext();
+  const { currentUser } = useAuthContext();
 
   const deleteNote = (note, collectionPath) => {
     if (note.id === selectedNoteID) {
@@ -74,6 +79,17 @@ export const TrashProvider = ({ children }) => {
     deleteDoc(docRef);
   };
 
+  const clearAll = async () => {
+    const q = query(
+      collection(db, "trash"),
+      where("uid", "==", currentUser.uid)
+    );
+    const docsSnapshot = await getDocs(q);
+    for await (const note of docsSnapshot.docs) {
+      deleteFromTrash(note.id);
+    }
+  };
+
   return (
     <TrashContext.Provider
       value={{
@@ -82,6 +98,7 @@ export const TrashProvider = ({ children }) => {
         deleteNote,
         restoreNote,
         deleteFromTrash,
+        clearAll,
       }}
     >
       {children}
