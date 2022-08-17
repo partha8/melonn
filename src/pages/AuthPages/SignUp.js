@@ -128,7 +128,7 @@ export const SignUp = () => {
         </div>
 
         {/* submit button */}
-        <button className="btn btn-primary-solid">Login</button>
+        <button className="btn btn-primary-solid">Sign Up!</button>
         <div className="action-links">
           <Link to="/login">Already have an account? Login!</Link>
         </div>

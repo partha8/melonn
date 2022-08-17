@@ -3,7 +3,6 @@ import { BsThreeDots, BsPersonCircle } from "react-icons/bs";
 import { AiOutlineSearch, AiOutlinePlus } from "react-icons/ai";
 import { IoMdTrash, IoMdArchive } from "react-icons/io";
 import { MdHome, MdStickyNote2 } from "react-icons/md";
-import { FaTags } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { useNotesContext } from "../../context/NotesProvider";
 import { useState } from "react";

@@ -5,6 +5,7 @@
     overflow-y: auto;
     word-wrap: break-word;
     position: relative;
+    max-height: 100vh;
 }
 
 .sidebarHeader {

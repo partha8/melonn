@@ -79,6 +79,17 @@ export const Login = () => {
           </div>
 
           <button className="btn btn-primary-solid">Sign In</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setEmail("parthasarma34@gmail.com");
+              setPwd("1234567");
+            }}
+            style={{ color: "white" }}
+            className="btn btn-primary-outline"
+          >
+            Guest Login
+          </button>
         </form>
 
         <br />
