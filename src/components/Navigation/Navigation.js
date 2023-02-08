@@ -69,11 +69,6 @@ export const Navigation = () => {
         </div>
       )}
 
-      <section className={styles.searchBar}>
-        <AiOutlineSearch className={styles.searchIcon} />
-        <input placeholder="search" className={styles.search} type="text" />
-      </section>
-
       <section
         onClick={() => newNoteHandler(tags[0].tag)}
         className={styles.btnContainer}
